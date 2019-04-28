@@ -15,5 +15,16 @@ python3 main.py
 
 
 ## Results
+
+### Two dimensional example
+
+* **_N_**: 5000
+* **_k_**: 5
+
 ![2D example](images/2D.svg)
+
+### Three dimensional example
+* **_N_**: 5000
+* **_k_**: 5
+
 ![3D example](images/3D.svg)
