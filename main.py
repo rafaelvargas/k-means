@@ -14,7 +14,9 @@ def generate_random_points(number_of_points, dimension):
 
 if __name__ == "__main__":
     points = generate_random_points(NUMBER_OF_POINTS, 2)
-    clusterer = KmeansClusterer(5, points, distance="haversine")
+    clusterer = KmeansClusterer(
+        5, points, distance="euclidian", weights=np.random.rand(NUMBER_OF_POINTS)
+    )
     clusters, clusters_weights, centroids = clusterer.run(10)
     fig = plt.figure()
     ax = fig.add_subplot(122)
@@ -35,5 +37,5 @@ if __name__ == "__main__":
         ax.plot(centroid[0], centroid[1], "kx", markersize=12)
         bx.scatter(cluster[0], cluster[1])
         bx.plot(centroid[0], centroid[1], "kx", markersize=12)
-    
+
     plt.show()
