@@ -9,14 +9,23 @@ class KmeansClusterer:
         self.number_of_clusters = k
         self.clusters = [[] for i in range(self.number_of_clusters)]
         self.dataset = dataset
+        try:
+            self.distance_calculation_method = distance_calculation_methods[
+                distance.lower()
+            ]
+        except KeyError:
+            raise Exception("Invalid distance method: {}".format(distance))
+        if (
+            self.distance_calculation_method == "haversine"
+            and dataset_dimensions[1] != 2
+        ):
+            raise Exception(
+                "Invalid data set dimensions for the chosen distance calculation method"
+            )
         self.centroids = np.empty((self.number_of_clusters, dataset_dimensions[1]))
         random_points_indexes = np.random.choice(
             np.arange(dataset_dimensions[0]), k, replace=False
         )
-        try:
-            self.distance_calculation_method = distance_calculation_methods[distance.lower()]
-        except KeyError:
-            raise Exception("Invalid distance method: {}".format(distance))
         for i, rand in enumerate(random_points_indexes):
             self.centroids[i] = self.dataset[rand]
 
